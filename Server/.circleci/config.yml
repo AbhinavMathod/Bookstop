@@ -1,0 +1,74 @@
+version: 2.1
+orbs:
+  node: circleci/node@1.1.6
+jobs:
+  build:
+    executor:
+      name: node/default
+    steps:
+      - checkout
+      - run: npm install
+      - run:
+          name: installing packages
+          command: sudo apt-get update && sudo apt-get install wget zip unzip && sudo apt-get install python-dev && sudo apt-get install python-pip -y
+      - run:
+          name: aws cli
+          command: sudo pip install awscli
+      - run:
+          name: Zip Artifact
+          command: |
+            echo "Build number ${CIRCLE_BUILD_NUM}"
+            mkdir -p codedeploy_artifact
+            zip -r csye6225-webapp-${CIRCLE_BUILD_NUM}.zip ./
+            ls -al
+            mv csye6225-webapp-${CIRCLE_BUILD_NUM}.zip codedeploy_artifact/
+            ls -al
+            pwd
+            cd codedeploy_artifact
+            ls -al
+            pwd
+            cd ..
+            pwd
+            ls -al
+      - run:
+          name: Upload To S3
+          command: |
+            aws s3 cp codedeploy_artifact/csye6225-webapp-${CIRCLE_BUILD_NUM}.zip s3://codedeploy.csye6225su-abhinav.me
+            echo "Uploaded to s3"
+      - run:
+          name: Make CodeDeploy API call
+          command: |
+            echo "CodeDeploy API call"
+            aws deploy register-application-revision --region us-east-1 --application-name csye6225-webapp \
+            --s3-location bucket=codedeploy.csye6225su-abhinav.me,key=csye6225-webapp-${CIRCLE_BUILD_NUM}.zip,bundleType=zip
+            echo "***************************************************************************************************"
+            aws deploy list-application-revisions --region us-east-1 --application-name csye6225-webapp \
+            --s-3-bucket codedeploy.csye6225su-abhinav.me --deployed exclude
+            echo "***************************************************************************************************"
+            deploymentId=$(aws deploy create-deployment --region us-east-1 \
+            --application-name csye6225-webapp \
+            --deployment-config-name CodeDeployDefault.AllAtOnce \
+            --deployment-group-name csye6225-webapp-deployment \
+            --s3-location bucket=codedeploy.csye6225su-abhinav.me,key=csye6225-webapp-${CIRCLE_BUILD_NUM}.zip,bundleType=zip \
+            --auto-rollback-configuration enabled=true,events=DEPLOYMENT_FAILURE,DEPLOYMENT_STOP_ON_ALARM,DEPLOYMENT_STOP_ON_REQUEST)
+            echo "$deploymentId"
+  # build:
+  #   executor:
+  #     name: node/default
+  #   steps:
+  #     - checkout
+  #     - node/with-cache:
+  #         steps:
+  #           - run: npm install
+  #           - run: npm test
+workflows:
+  version: 2
+  build_deploy:
+    jobs:
+      - build
+          
+
+  
+
+
+        
