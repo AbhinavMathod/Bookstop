@@ -694,7 +694,7 @@ resource "aws_iam_user_policy" "CircleCI-Code-Deploy" {
         "codedeploy:GetApplicationRevision"
       ],
       "Resource": [
-        "arn:aws:codedeploy:us-east-1:329397983144:application:csye6225-webapp"
+        "arn:aws:codedeploy:us-east-1:***************:application:csye6225-webapp"
       ]
     },
     {
@@ -720,9 +720,9 @@ resource "aws_iam_user_policy" "CircleCI-Code-Deploy" {
         "codedeploy:GetApplicationRevision"
       ],
       "Resource": [
-        "arn:aws:codedeploy:us-east-1:329397983144:deploymentconfig:CodeDeployDefault.OneAtATime",
-        "arn:aws:codedeploy:us-east-1:329397983144:deploymentconfig:CodeDeployDefault.HalfAtATime",
-        "arn:aws:codedeploy:us-east1:329397983144:deploymentconfig:CodeDeployDefault.AllAtOnce"
+        "arn:aws:codedeploy:us-east-1:***************:deploymentconfig:CodeDeployDefault.OneAtATime",
+        "arn:aws:codedeploy:us-east-1:***************:deploymentconfig:CodeDeployDefault.HalfAtATime",
+        "arn:aws:codedeploy:us-east1:***************:deploymentconfig:CodeDeployDefault.AllAtOnce"
       ]
     }
   ]
@@ -1082,7 +1082,7 @@ resource "aws_lb_listener" "aws_lb_listener_frontend" {
   port = 443
   protocol = "HTTPS"
   ssl_policy = "ELBSecurityPolicy-2016-08"
-  certificate_arn = "arn:aws:acm:us-east-1:329397983144:certificate/e66aa522-309f-40a3-8cbb-e96c213b4ae2"
+  certificate_arn = "arn:aws:acm:us-east-1:***************:certificate/e66aa522-309f-40a3-8cbb-e96c213b4ae2"
   default_action {
     type = "forward"
     target_group_arn = "${aws_lb_target_group.awsLbTargetGroupfrontend.arn}"
@@ -1094,7 +1094,7 @@ resource "aws_lb_listener" "aws_lb_listener_abackend" {
     port = 3000
     protocol = "HTTPS"
     ssl_policy = "ELBSecurityPolicy-2016-08"
-    certificate_arn = "arn:aws:acm:us-east-1:329397983144:certificate/e66aa522-309f-40a3-8cbb-e96c213b4ae2"
+    certificate_arn = "arn:aws:acm:us-east-1:***************:certificate/e66aa522-309f-40a3-8cbb-e96c213b4ae2"
     default_action {
         type = "forward"
         target_group_arn = "${aws_lb_target_group.awsLbTargetGroupbackend.arn}"
@@ -1190,7 +1190,7 @@ policy =  <<EOF
               "Action": ["dynamodb:GetItem",
               "dynamodb:PutItem",
               "dynamodb:UpdateItem"],
-              "Resource": "arn:aws:dynamodb:us-east-1:329397983144:table/csye6225-dynamo"
+              "Resource": "arn:aws:dynamodb:us-east-1:***************:table/csye6225-dynamo"
             },
             {
               "Sid": "LambdaSESAccess",
@@ -1198,7 +1198,7 @@ policy =  <<EOF
               "Action": ["ses:VerifyEmailAddress",
               "ses:SendEmail",
               "ses:SendRawEmail"],
-              "Resource": "arn:aws:ses:us-east-1:329397983144:identity/*"
+              "Resource": "arn:aws:ses:us-east-1:***************:identity/*"
             },
             {
               "Sid": "LambdaS3Access",
@@ -1272,7 +1272,7 @@ policy = <<EOF
                 "lambda:DeleteFunctionConcurrency",
                 "lambda:PublishVersion"
             ],
-            "Resource": "arn:aws:lambda:us-east-1:329397983144:function:csye6225"
+            "Resource": "arn:aws:lambda:us-east-1:***************:function:csye6225"
         }
 ]
 }

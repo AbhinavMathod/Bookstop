@@ -6,7 +6,7 @@
       "source_ami": "ami-0ac80df6eff0e70b5",
       "subnet_id": "subnet-50fd9b1c",
       "ssh_username": "ubuntu",
-      "ami_users": "329397983144,280727714444"
+      "ami_users": "****************,*****************"
     },
     "builders": [{
       "type": "amazon-ebs",

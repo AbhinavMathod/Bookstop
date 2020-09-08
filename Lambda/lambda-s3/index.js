@@ -30,7 +30,7 @@ exports.handler = (event, context, callback) => {
             //message: event.Records[0].Sns.Message,
             ttl: (Math.floor(Date.now() / 1000) + 900).toString()
         },
-        TableName: "csye6225-dynamo"
+        TableName: "abhinav-dynamo"
     };
 
     function putCheck() {
@@ -47,7 +47,7 @@ exports.handler = (event, context, callback) => {
 
 
     const params2 = {
-        TableName: "csye6225-dynamo",
+        TableName: "abhinav-dynamo",
         KeyConditionExpression: 'id = :i',
         ExpressionAttributeValues: {
             ':i': event_data[0]
@@ -98,11 +98,11 @@ exports.handler = (event, context, callback) => {
 
 
     function sendEmail(to_email) {
-        var sender = "abhinavmathod1995@prod.csye6225su-abhinav.me"
+        var sender = "abhinavmathod1995@prod.abhinavsu-abhinav.me"
 
 
         
-        var links = "http://prod.csye6225su-abhinav.me/users/update";
+        var links = "http://prod.abhinavsu-abhinav.me/users/update";
  
         console.log(links + "mine");
 
@@ -118,12 +118,12 @@ exports.handler = (event, context, callback) => {
                             //Data: links
                             Data: '<html><head>' +
                                 '<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />' +
-                                '<title>' + "Password Reset csye6225su-abhinav" + '</title>' +
+                                '<title>' + "Password Reset abhinavsu-abhinav" + '</title>' +
                                 '</head><body>' +
                                 'This is the link to update your password. It is valid for fifteen minutes.' +
                                 '<br><br>' +
-                                "<a href=\"https://" + "prod.csye6225su-abhinav.me" + "/users/update?" + token_data + "\">" +
-                                "https://" + "prod.csye6225su-abhinav.me" + "/users/update?" + token_data + "</a>"
+                                "<a href=\"https://" + "prod.abhinavsu-abhinav.me" + "/users/update?" + token_data + "\">" +
+                                "https://" + "prod.abhinavsu-abhinav.me" + "/users/update?" + token_data + "</a>"
                                 +'</body></html>'
                         }
                     },
