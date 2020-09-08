@@ -1,5 +1,5 @@
-# infrastructure
-Infrastructure Repo
+# INFRASTRUCTURE
+Infrastructure As A Code 
  
  ## This is a project to setup cloud backend infrastructure on AWS. 
 
