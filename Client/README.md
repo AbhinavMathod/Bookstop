@@ -31,9 +31,9 @@ Project has two directories: one for UI (named webapp) and the other for backend
 1. [Angular CLI](https://github.com/angular/angular-cli)
 2. [Node.js](https://nodejs.org/dist/latest-v12.x/docs/api/).
 3. [express](https://expressjs.com/en/4x/api.html).
-4. [Postgres]
+4. Postgres
 5. Use of RESTful operations using POST, GET, PUT, DELETE for CRUD operations.
-6. [AWSCodeDeploy]
+6. AWS 
 
 ### Steps to run
 1. Clone repository.
@@ -46,5 +46,3 @@ Project has two directories: one for UI (named webapp) and the other for backend
 8. This will navigate to `http://localhost:4200/`
 
 
-
-### Added synchronization with S3 bucket on AWS
