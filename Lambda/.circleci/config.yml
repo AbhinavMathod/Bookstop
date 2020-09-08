@@ -1,0 +1,44 @@
+version: 2.1
+orbs:
+  node: circleci/node@1.1.6
+jobs:
+  build:
+    executor:
+      name: node/default
+    steps:
+      - checkout
+      - run: npm install
+      - run:
+          name: installing packages
+          command: sudo apt-get update && sudo apt-get install wget zip unzip && sudo apt-get install python-dev && sudo apt-get install python-pip -y
+      - run:
+          name: aws cli
+          command: sudo pip install awscli
+      - run:
+          name: Zip the packages
+          command: |
+            mkdir lambda-artifact
+            cd lambda-s3
+            zip -r ../csye6225-lambda-function-${CIRCLE_BUILD_NUM}.zip index.js config.json
+            pwd
+            ls -al
+            cd ..
+            cp csye6225-lambda-function-${CIRCLE_BUILD_NUM}.zip lambda-artifact/
+            ls -al
+            pwd
+            cd lambda-artifact
+            pwd
+            ls -al
+            cd ..
+            pwd
+            ls -al
+      - run:
+          name: Copy the needed artifacts to S3
+          command: aws s3 sync ./lambda-artifact s3://lambda.codedeploy.bucket
+      - run:
+          name: aws lambda create Lambda Function
+          command: |
+            aws lambda update-function-code \
+              --function-name  csye6225 \
+              --zip-file fileb://csye6225-lambda-function-${CIRCLE_BUILD_NUM}.zip \
+              --region us-east-1
