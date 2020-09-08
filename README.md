@@ -32,3 +32,5 @@ An e-commerce application to purchase books developed using Postgres,ExpressJS,A
 
 ### All the folders work best as separate repositories. 
 
+### ReadMe for each component is within the respective component directories
+
