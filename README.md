@@ -3,11 +3,11 @@ An e-commerce application to purchase books developed using Postgres,ExpressJS,A
 
 ## Repository Guide 
 
-`Client` : Angular code package for the user interface
-`Server` : The server side nodeJS code for the backend 
-`Packer` : Packer template for AMI creation and CircleCI template for automation
-`Terraform` : Terraform Template for AWS imfrastructure as a code setup
-`Lambda` : Lambda function for sending out password request emails using SES and triggered using SNS
+1. `Client` : Angular code package for the user interface
+2. `Server` : The server side nodeJS code for the backend 
+3. `Packer` : Packer template for AMI creation and CircleCI template for automation
+4. `Terraform` : Terraform Template for AWS imfrastructure as a code setup
+5. `Lambda` : Lambda function for sending out password request emails using SES and triggered using SNS
 
 ## Technology Stack 
 1. `Angular`
