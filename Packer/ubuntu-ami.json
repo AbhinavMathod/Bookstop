@@ -1,0 +1,54 @@
+{
+    "variables": {
+      "aws_access_key": "",
+      "aws_secret_key": "",
+      "aws_region": "us-east-1",
+      "source_ami": "ami-0ac80df6eff0e70b5",
+      "subnet_id": "subnet-50fd9b1c",
+      "ssh_username": "ubuntu",
+      "ami_users": "329397983144,280727714444"
+    },
+    "builders": [{
+      "type": "amazon-ebs",
+      "ami_users" : "{{user `ami_users`}}",
+      "access_key": "{{user `aws_access_key`}}",
+      "secret_key": "{{user `aws_secret_key`}}",
+      "region": "{{user `aws_region`}}",
+      "source_ami": "{{user `source_ami`}}",
+      "instance_type": "t2.micro",
+      "ssh_username": "ubuntu",
+      "ami_name": "csye6225_a4_{{timestamp}}",
+      "ami_description": "csye6225 assignment 4",
+      "launch_block_device_mappings": [
+                  {
+                      "device_name": "/dev/sda1",
+                      "volume_size": 8,
+                      "volume_type": "gp2",
+                      "delete_on_termination": true
+                  }
+              ]
+    }],
+    "provisioners": [
+          {
+              "type": "shell",
+              "inline": [
+                "sudo apt update -y",
+                "sudo apt install nodejs -y",
+                "sudo apt install npm -y",
+                "sudo apt-get install -y nodejs",
+                "sudo apt-get install -y apache2",
+                "sudo chown -R ubuntu:ubuntu /var/www/html",
+                "sudo chmod +x /var/www/html",
+                "sudo apt-get install ruby -y",
+                "sudo apt-get install wget -y",
+                "cd /home/ubuntu",
+                "sudo wget https://aws-codedeploy-us-east-1.s3.us-east-1.amazonaws.com/latest/install",
+                "sudo chmod +x ./install",
+                "sudo ./install auto",
+                "sudo wget https://s3.us-east-1.amazonaws.com/amazoncloudwatch-agent-us-east-1/ubuntu/amd64/latest/amazon-cloudwatch-agent.deb",
+                "sudo dpkg -i -E ./amazon-cloudwatch-agent.deb"
+              ]
+          }
+      ]
+  }
+

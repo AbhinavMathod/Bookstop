@@ -1,0 +1,39 @@
+version: 2
+orbs:
+  aws-cli: circleci/aws-cli@0.1.20
+jobs:
+  build:
+    docker:
+      - image: circleci/python:2.7-jessie
+    steps:
+      - checkout
+      - run:
+          name: Update apt-get
+          command: sudo apt-get update
+      - run:
+          name: install wget
+          command: sudo apt-get install wget zip unzip          
+      - run:
+          name: aws cli
+          command: sudo pip install awscli
+
+      - run:
+          name: Download packer
+          command: wget -q https://releases.hashicorp.com/packer/1.5.4/packer_1.5.4_linux_amd64.zip
+      - run:
+          name: Unzip packer
+          command: unzip packer_1.5.4_linux_amd64.zip       
+      - run:
+          name: Validate Packer Template
+          command: ./packer validate ubuntu-ami.json
+      - run:
+          name: Build AMI
+          command: ./packer build ubuntu-ami.json
+          
+workflows:
+  version: 2
+  build-ami:
+    jobs:
+    - build
+    
+    
