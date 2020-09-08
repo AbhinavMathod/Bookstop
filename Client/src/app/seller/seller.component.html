@@ -1,0 +1,157 @@
+<div class="dataholder">
+  <nav class="" style="display: flex; justify-content: center; margin-top: 2rem;" >
+  <div style="margin-left: auto; margin-right: auto;">
+    <form class="form" style="width: fit-content;height: fit-content;" (submit)="addbook(isbn.value,title.value,author.value,publicationdate.value,quantity.value,price.value); isbn.value='';title.value='';author.value='';publicationdate.value='';quantity.value='';price.value=''">
+    <span style="display: flex;">
+      
+        <input  #isbn matInput class="inputSection" placeholder="ISBN" required/>
+      
+      
+        <input #title matInput class="inputSection" placeholder="Title" required/>
+      
+      
+        <input #author matInput class="inputSection" placeholder="Authors" required/>
+      
+
+      
+        <input type="date" #publicationdate  placeholder="publicationdate" required>
+    
+    
+      <input #quantity matInput class="inputSection" placeholder="Quantity" required/>
+    
+
+    
+      <input #price matInput class="inputSection" placeholder="Price" required/>
+    
+
+    
+      <input (change)="onImagePicked($event)" placeholder="Upload Image" type="file" multiple/>
+    
+
+   
+      <input type="submit" value="ADD" class="btn_sty" />
+    
+
+      <button (click)="handleUpload()" class="btn_sty btnEdit">Upload Image</button>
+     </span>
+    </form>
+  </div>
+  </nav>
+  
+
+
+
+<!-- <div *ngFor="let book of books" [hidden]="this.details.username !== book.seller_name">
+  <p>ISBN:{{book.isbn}}</p>
+  <p >Title: {{book.title}}</p>
+  <p class="title_todo title_headerr">            
+    <a (click)="edit(book)">
+    <span class="input_editoption" *ngIf="book!==updatedbook">Authors: {{book.authors}}</span>
+    <input class="input_editoption" *ngIf="book===updatedbook" [(ngModel)]="book.authors" (keyup.enter)="update()"/>
+  </a>        
+  </p>
+  <p class="title_todo title_headerr">Publication Date: {{book.publication_date}}</p>
+  <p class="title_todo title_headerr">Quantity: {{book.quantity}} </p>
+  <p class="title_todo title_headerr">Price:   {{book.PRICE}}        </p>
+  <p class="title_todo title_headerr">seller:    {{book.seller_name}}      </p>
+  <p class="title_todo title_headerr">Last Updated:  {{book.updatedAt}}  </p>
+  <p class="title_todo title_headerr">Button:    <button (click)="loadimage(book)">Show images</button> </p>
+  <div class="title_todo title_headerr">
+    <div class="image" *ngFor="let bookImg of myvar" [hidden]="book.id !== bookImg.id">
+      Images:
+      <div  *ngFor="let img of bookImg.image" >
+        <img width="100px" src='data:image/jpeg;base64,{{img}}' />
+      </div>
+    </div>     
+  </div>
+  <button class="btn_sty btnEdit" (click)="update()">Update</button>
+  <button class="btn_sty btnEdit" (click)="delete(book)">Delete</button>
+  <hr/>
+</div> -->
+  
+    <table class="table_todo">
+      <tr>
+        <td class="title_todo title_headerr">ISBN            </td>
+        <td class="title_todo title_headerr">Title           </td>
+        <td class="title_todo title_headerr">Authors         </td>
+        <td class="title_todo title_headerr">Publication Date</td>
+        <td class="title_todo title_headerr">Quantity        </td>
+        <td class="title_todo title_headerr">Price           </td>
+        <td class="title_todo title_headerr">seller          </td>
+        <td class="title_todo title_headerr">Last Updated    </td>
+        <td class="title_todo title_headerr">Button          </td>
+        <td class="title_todo title_headerr">Image           </td>
+      </tr>
+      <tr class="table_rowStyle" *ngFor="let book of books" [hidden]="this.details.username !== book.seller_name">
+        <td class="title_todo">
+            <a (click)="edit(book)">
+                <span class="input_editoption" *ngIf="book!==updatedbook">{{book.isbn}}</span>
+                <input class="input_editoption" *ngIf="book===updatedbook" [(ngModel)]="book.isbn" (keyup.enter)="update()">
+              </a>
+        </td>
+        <td class="title_todo">
+            <a (click)="edit(book)">
+                <span class="input_editoption" *ngIf="book!==updatedbook">{{book.title}}</span>
+                <input class="input_editoption" *ngIf="book===updatedbook" [(ngModel)]="book.title" (keyup.enter)="update()">
+              </a>
+        </td>
+        <td class="title_todo">
+            <a (click)="edit(book)">
+                <span class="input_editoption" *ngIf="book!==updatedbook">{{book.authors}}</span>
+                <input class="input_editoption" *ngIf="book===updatedbook" [(ngModel)]="book.authors" (keyup.enter)="update()">
+              </a>
+        </td>
+        <td class="title_todo">
+            <a (click)="edit(book)">
+                <span class="input_editoption" *ngIf="book!==updatedbook">{{book.publication_date}}</span>
+                <input class="input_editoption" *ngIf="book===updatedbook" [(ngModel)]="book.publication_date" (keyup.enter)="update()">
+              </a>
+        </td>
+        <td class="title_todo">
+            <a (click)="edit(book)">
+                <span class="input_editoption" *ngIf="book!==updatedbook">{{book.quantity}}</span>
+                <input class="input_editoption" *ngIf="book===updatedbook" [(ngModel)]="book.quantity" (keyup.enter)="update()">
+              </a>
+        </td>
+        <td class="title_todo">
+            <a (click)="edit(book)">
+                <span class="input_editoption" *ngIf="book!==updatedbook">{{book.price}}</span>
+                <input class="input_editoption" *ngIf="book===updatedbook" [(ngModel)]="book.price" (keyup.enter)="update()">
+              </a>
+            </td>
+        <td class="title_todo">
+            <a>
+              <span class="input_editoption">{{book.seller_name}}</span>
+            </a>
+        </td>
+        <td class="title_todo">
+      
+                <span class="input_editoption" >{{book.updatedAt}}</span>
+          
+        </td>
+        <td class="image" >
+          <button #view (click)="loadimage(book)" class="btn_sty btnEdit">Show images{{book.id}}</button>
+        </td>
+        <td class="image" *ngFor="let bookImg of myvar" >
+          <div  *ngFor="let img of bookImg.image" [hidden]="book.id !== bookImg.id">
+          <img width="50px" src='data:image/jpeg;base64,{{img}}' />
+        </div>
+        </td>
+        <td>
+          <input (change)="onImagePicked($event)" placeholder="Upload Image" type="file" multiple/>
+          <button class="btn_sty btnEdit" (click)="handleUpload()">Add Image</button>
+        </td>
+        <td>
+            <button class="btn_sty btnEdit" (click)="update()">Update</button>
+        </td>
+        <td>
+            <button class="btn_sty btnEdit" (click)="delete(book)">Delete</button>
+
+        </td>
+      </tr>
+    </table>
+    
+</div>
+
+
+

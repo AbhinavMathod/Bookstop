@@ -1,0 +1,22 @@
+<table class="table_todo">
+    <tr>
+      <td class="title_todo title_headerr">Book ID            </td>
+      <td class="title_todo title_headerr">Seller Name        </td>
+      <td class="title_todo title_headerr">File Name          </td>
+    </tr>
+    <tr class="table_rowStyle" *ngFor="let image of images" [hidden]="details.username !== image.seller_name">
+    <td class="title_todo">
+        <a>{{image.bookID}}</a>
+    </td>
+    <td class="title_todo">
+        <a>{{image.seller_name}}</a>
+    </td>
+    <td class="title_todo">
+        <a>{{image.key}}</a> 
+    </td>
+    <td class="title_todo">
+        <button (click)="deleteimage(image)">Delete</button> 
+    </td>
+    </tr>
+    </table>
+

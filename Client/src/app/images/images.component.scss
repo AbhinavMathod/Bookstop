@@ -1,0 +1,46 @@
+.inputSection{
+    display: inline-block;
+    margin-right: 1em;
+    height: 30px;
+  }
+  .table_todo{
+    width: 100em;
+    position: relative;
+    margin-left: 3em;
+  }
+  .header_section{
+    display: inline-block;
+    margin-right: 5em;
+    left: 3em;
+    position: relative;
+    margin-left: 1em;
+  }
+  .input_editoption{
+    width:6em;
+  }
+  .dataholder{
+    position: relative;
+    top: 2em;
+    
+  }
+  .btn_sty{
+    background-color:#555555; /* Green */
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 10px;
+    margin-bottom: 10px;
+    width: 80px;
+    height: 30px;
+  }
+  .table_rowStyle{
+    border: 1px solid gray;
+    height: 3em;
+  }
+  .title_headerr{
+    font-size: large;
+    font-weight: bold;
+  }
+  

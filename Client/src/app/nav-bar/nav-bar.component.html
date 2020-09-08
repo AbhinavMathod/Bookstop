@@ -1,0 +1,16 @@
+<ul class="nav justify-content-center nav-pills sticky-top " style="background-color: white;">
+    <li *ngIf="auth.isLoggedIn()" class="nav-item active"><a routerLink="app-profile">{{ auth.getUserDetails()?.firstname }}</a></li>
+    <li *ngIf="auth.isLoggedIn()" class="nav-item active"><a (click)="auth.logout()">Logout</a></li>
+    <li *ngIf="!auth.isLoggedIn()" class="nav-item active"><a routerLink="app-register">Signup</a></li>  
+    <li *ngIf="!auth.isLoggedIn()" class="nav-item active"><a routerLink="app-login">Login</a></li>
+    <li *ngIf="auth.isLoggedIn()" class="nav-item active"><a routerLink="app-buyer">Buy</a></li>
+    <li *ngIf="auth.isLoggedIn()" class="nav-item active"><a routerLink="app-cart">Cart</a></li>
+    <li *ngIf="auth.isLoggedIn()" class="nav-item active"><a routerLink="app-seller">Seller</a></li>
+    <li *ngIf="auth.isLoggedIn()" class="nav-item active"><a routerLink="app-images">Uploaded Images</a></li>
+
+</ul>
+
+    
+ 
+    
+  

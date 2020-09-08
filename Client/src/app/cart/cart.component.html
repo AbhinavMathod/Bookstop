@@ -1,0 +1,41 @@
+<div class="dataholder">
+    <table class="table_todo">
+      <tr>
+        <td class="title_todo title_headerr">ISBN</td>
+        <td class="title_todo title_headerr">Title</td>
+        <td class="title_todo title_headerr">Quantity</td>
+        <td class="title_todo title_headerr">Price</td>
+        <td class="title_todo title_headerr">UserName</td>
+      </tr>
+      <tr class="table_rowStyle" *ngFor="let order of orders">
+        <ng-container *ngIf="order.username == details.username ">
+        <td class="title_todo">
+            <a>
+              <span class="input_editoption">{{order.isbn}}</span>
+            </a>
+        </td>
+        <td class="title_todo">
+            <a>
+              <span class="input_editoption">{{order.title}}</span>
+            </a>
+        </td>
+        <td class="title_todo">
+            <a>
+              <span class="input_editoption">{{order.quantity}}</span>
+            </a>
+        </td>
+        <td class="title_todo">
+            <a>
+              <span class="input_editoption">{{order.price}}</span>
+            </a>
+        </td>
+        <td class="title_todo">
+            <a>
+              <span class="input_editoption">{{order.username}}</span>
+            </a>
+        </td>
+        </ng-container>
+      </tr>
+    </table>
+</div>
+

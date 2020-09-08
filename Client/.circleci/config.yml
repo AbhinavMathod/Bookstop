@@ -1,0 +1,56 @@
+version: 2.1
+orbs:
+  node: circleci/node@1.1.6
+jobs:
+  build:
+    working_directory: ~/webapp-Angular
+    executor:
+      name: node/default
+    steps:
+      - checkout
+      - run:
+          name: installing packages
+          command: sudo apt-get update && sudo apt-get install unzip && sudo apt install curl
+      - run:
+          name: aws cli
+          command: |
+            sudo apt-get install -y less
+            curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+            unzip awscliv2.zip
+            sudo ./aws/install
+      - run:
+          name: ng build
+          command: |
+            npm install
+            npm run build
+            set -x
+            cp appspec.yml ~/webapp-Angular/dist/secure-frontend
+            cp -R scripts ~/webapp-Angular/dist/secure-frontend
+            ls -lart ~/webapp-Angular/dist/secure-frontend
+            set +x
+      - run:
+          name: Upload To S3
+          command: |
+            export AWS_DEFAULT_REGION="us-east-1"
+            aws deploy push \
+            --application-name csye6225-frontend \
+            --description "testing for codedeploy 123" \
+            --ignore-hidden-files \
+            --s3-location s3://codedeploy.csye6225su-abhinav.me/csye6225-frontend${CIRCLE_BUILD_NUM}.zip \
+            --source ~/webapp-Angular/dist/secure-frontend
+      - run:
+          name: Amazon Deploy
+          command: |
+            export AWS_DEFAULT_REGION="us-east-1"
+            aws deploy create-deployment \
+            --application-name csye6225-frontend \
+            --deployment-group-name csye6225-frontend-deployment \
+            --s3-location bucket=codedeploy.csye6225su-abhinav.me,bundleType=zip,key=csye6225-frontend${CIRCLE_BUILD_NUM}.zip
+
+
+workflows:
+  version: 2
+  build_deploy:
+    jobs:
+      - build
+  

@@ -1,0 +1,71 @@
+<div class="dataholder">
+    <table class="table_todo">
+      <tr>
+        <td class="title_todo title_headerr">ISBN           </td>
+        <td class="title_todo title_headerr">Title          </td>
+        <td class="title_todo title_headerr">Authors        </td>
+        <td class="title_todo title_headerr">PublicationDate</td>
+        <td class="title_todo title_headerr">Quantity       </td>
+        <td class="title_todo title_headerr">Price          </td>
+        <td class="title_todo title_headerr">Seller         </td>
+      </tr>
+      <tr class="table_rowStyle" *ngFor="let book of books" [hidden]="details.username == book.seller_name">
+        <td class="title_todo">
+            <a>
+              <span class="input_editoption">{{book.isbn}}</span>
+            </a>
+        </td>
+        <td class="title_todo">
+            <a>
+              <span class="input_editoption">{{book.title}}</span>
+            </a>
+        </td>
+        <td class="title_todo">
+            <a>
+              <span class="input_editoption">{{book.authors}}</span>
+            </a>
+        </td>
+        <td class="title_todo">
+            <a>
+              <span class="input_editoption">{{book.publication_date}}</span>
+            </a>
+        </td>
+        <td class="title_todo">
+            <a>
+              <span class="input_editoption">{{book.quantity}}</span>
+            </a>
+        </td>
+        <td class="title_todo">
+            <a>
+              <span class="input_editoption">{{book.price}}</span>
+            </a>
+        </td>
+        <td class="title_todo">
+          <a>
+            <span class="input_editoption">{{book.seller_name}}</span>
+          </a>
+      </td>
+      <td class="title_todo">
+        <a>
+          <form class="form" (submit)= "setQuantity(qty.value); qty.value = '';">
+          <input #qty class="input_editoption" placeholder="Quantity"/>
+          <input type="submit" value="set" class="btn_sty" />
+          </form>
+        </a>
+    </td>
+    <td class="image" >
+      <button #view (click)="loadimage(book)">Show images{{book.id}}</button>
+    </td>
+    <td class="image" *ngFor="let bookImg of myvar" >
+      <div  *ngFor="let img of bookImg.image" [hidden]="book.id !== bookImg.id">
+      <img width="50px" src='data:image/jpeg;base64,{{img}}' />
+    </div>
+    </td>
+        <td class="title_todo">
+          <a>
+            <button (click) = "addtocart(book)">Add to Cart</button>
+          </a>
+      </td>
+      </tr>
+    </table>
+</div>
